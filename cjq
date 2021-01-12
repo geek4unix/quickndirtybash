@@ -1,0 +1,8 @@
+#!/bin/bash
+#CleanJQ
+sed 's/\[//g'|\ # remove [
+sed 's/\]//g'|\ # remove ]
+sed 's/\",//g'|\ # remove ",
+sed 's/\"//g'|\ # remove "
+tr -d " "|\ # remove spaces
+sed '/^$/d' # remove empty lines

@@ -1,0 +1,25 @@
+Clean JQ -  strip square bracket, double quotes, commas, newlines and pre/tailing spaces in ["DATA"], that gets piped in.
+
+At first I thought I was using JQ wrong, then i used sed / tr and so on clean up the jq output. Then i put it together in my ~/bin/ folder as cjq ( which is in my path ).
+
+mkdir ~/bin
+cp cjq ~/bin/
+chmod 700 ~/bin/
+export PATH=~/bin:$PATH
+
+somecommand | jq -r '.something' | cjq
+
+example:
+without cjq: 
+
+quickndirtybash % jq -r '.["result"]["nameservers"]' < ~/mynameserverfarm.json
+[
+  "NS1.SOMEWEBHOST.ORG",
+  "NS2.SOMEWEBHOST.ORG"
+]
+
+with cjq:
+
+quickndirtybash % jq -r '.["result"]["nameservers"]' < ~/mynameserverfarm.json | cjq
+NS1.SOMEWEBHOST.ORG
+NS2.SOMEWEBHOST.ORG
